@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
+import "./App.css";
 import axios from "axios";
 
 function App() {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [latitude, setLatitude] = useState("");
+    const [longitude, setLongitude] = useState("");
+    const [fromDate, setFromDate] = useState("");
+    const [toDate, setToDate] = useState("");
     const [data, setData] = useState(null);
     const qwerty = {
         latitude: 28.625,
@@ -217,7 +222,7 @@ function App() {
             const response = await new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(qwerty);
-                }, 7000);
+                }, 1000);
             });
             setData(response);
             console.log(response);
@@ -233,7 +238,66 @@ function App() {
     }, []);
 
     return (
-        <div>{isLoading ? <h1>Loading...</h1> : <h1>Hello React 🚀</h1>}</div>
+        <div>
+            {isLoading ? (
+                <h1>Loading...</h1>
+            ) : (
+                <div id="main-container">
+                    {/* get info block */}
+                    <div id="get-info-block">
+                        {/* location block */}
+                        <div id="location-block">
+                            <h1>Location</h1>
+                            <div id="latitude-block">
+                                <span>Enter latitude:</span>
+                                <input
+                                    type="text"
+                                    value={latitude}
+                                    onChange={(e) =>
+                                        setLatitude(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div id="longitude-block">
+                                <span>Enter longitude:</span>
+                                <input
+                                    type="text"
+                                    value={longitude}
+                                    onChange={(e) =>
+                                        setLongitude(e.target.value)
+                                    }
+                                />
+                            </div>
+                        </div>
+                        {/* date block */}
+                        <div id="date-block">
+                            <h1>Date</h1>
+                            <div id="from-date-block">
+                                <span>From date:</span>
+                                <input
+                                    type="date"
+                                    value={fromDate}
+                                    onChange={(e) =>
+                                        setFromDate(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div id="to-date-block">
+                                <span>To date:</span>
+                                <input
+                                    type="date"
+                                    value={toDate}
+                                    onChange={(e) => setToDate(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="display-info-block">
+                        <span>Display info block</span>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }
 
