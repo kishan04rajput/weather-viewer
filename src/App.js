@@ -101,10 +101,6 @@ function App() {
         setToDate(value);
     };
 
-    useEffect(() => {
-        // fetchData();
-    }, []);
-
     return (
         <div>
             {isLoading ? (
