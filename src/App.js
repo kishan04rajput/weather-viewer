@@ -12,12 +12,24 @@ function App() {
     const [data, setData] = useState(null);
 
     const fetchData = async () => {
-        if (!latitude || !longitude || !fromDate || !toDate) {
-            console.error("Please fill all data....");
+        if (!latitude) {
+            window.alert("Please fill latitude.");
             return;
         }
-        setIsLoading(true);
+        if (!longitude) {
+            window.alert("Please fill longitude.");
+            return;
+        }
+        if (!fromDate) {
+            window.alert("Please fill fromDate.");
+            return;
+        }
+        if (!toDate) {
+            window.alert("Please fill toDate.");
+            return;
+        }
         try {
+            setIsLoading(true);
             const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_max,apparent_temperature_min,apparent_temperature_mean&start_date=${fromDate}&end_date=${toDate}&timezone=Asia/Kolkata`;
 
             // const response = await axios.get(apiUrl);
@@ -32,6 +44,37 @@ function App() {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const updateLatitude = (value) => {
+        if (value > 90 || value < -90) {
+            window.alert("Latitude can be between +90 to -90 only");
+            return;
+        }
+        setLatitude(value);
+    };
+
+    const updateLongitude = (value) => {
+        if (value > 180 || value < -180) {
+            window.alert("Longitude can be between +180 to -180 only");
+            return;
+        }
+        setLongitude(value);
+    };
+
+    const updateToDate = (value) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const selectedDate = new Date(value);
+        selectedDate.setHours(0, 0, 0, 0);
+
+        if (selectedDate.getTime() > today.getTime()) {
+            window.alert("Error, Can't set future date.");
+            return;
+        }
+
+        setToDate(value);
     };
 
     useEffect(() => {
@@ -56,7 +99,7 @@ function App() {
                                         type="text"
                                         value={latitude}
                                         onChange={(e) =>
-                                            setLatitude(e.target.value)
+                                            updateLatitude(e.target.value)
                                         }
                                     />
                                 </div>
@@ -66,7 +109,7 @@ function App() {
                                         type="text"
                                         value={longitude}
                                         onChange={(e) =>
-                                            setLongitude(e.target.value)
+                                            updateLongitude(e.target.value)
                                         }
                                     />
                                 </div>
@@ -90,7 +133,7 @@ function App() {
                                         type="date"
                                         value={toDate}
                                         onChange={(e) =>
-                                            setToDate(e.target.value)
+                                            updateToDate(e.target.value)
                                         }
                                     />
                                 </div>
