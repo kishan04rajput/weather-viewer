@@ -5,27 +5,46 @@ import { qwerty } from "./qwerty.js";
 
 function App() {
     const [isLoading, setIsLoading] = useState(false);
-    const [latitude, setLatitude] = useState(22.3119112);
-    const [longitude, setLongitude] = useState(73.1674174);
+    const [latitude, setLatitude] = useState("");
+    const [longitude, setLongitude] = useState("");
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
     const [data, setData] = useState(null);
 
-    const fetchData = async () => {
+    const addDelay = async (value) => {
+        await new Promise((resolve, reject) => {
+            setTimeout(() => resolve(), value);
+        });
+    };
+
+    const isInputValidated = () => {
         if (!latitude) {
             window.alert("Please fill latitude.");
-            return;
+            return false;
         }
         if (!longitude) {
             window.alert("Please fill longitude.");
-            return;
+            return false;
         }
         if (!fromDate) {
             window.alert("Please fill fromDate.");
-            return;
+            return false;
         }
         if (!toDate) {
             window.alert("Please fill toDate.");
+            return false;
+        }
+        if (fromDate > toDate) {
+            window.alert(
+                'Error, "From date" can\'t be greater than "To date".'
+            );
+            return false;
+        }
+        return true;
+    };
+
+    const fetchData = async () => {
+        if (!isInputValidated()) {
             return;
         }
         try {
@@ -34,9 +53,7 @@ function App() {
 
             // const response = await axios.get(apiUrl);
             const response = qwerty;
-            await new Promise((resolve, reject) => {
-                setTimeout(() => resolve(), 1000);
-            });
+            await addDelay(1000);
             setData(response);
             console.log(response);
         } catch (error) {
@@ -62,7 +79,7 @@ function App() {
         setLongitude(value);
     };
 
-    const updateToDate = (value) => {
+    const isFutureDate = (value) => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
@@ -70,6 +87,13 @@ function App() {
         selectedDate.setHours(0, 0, 0, 0);
 
         if (selectedDate.getTime() > today.getTime()) {
+            return true;
+        }
+        return false;
+    };
+
+    const updateToDate = (value) => {
+        if (isFutureDate(value)) {
             window.alert("Error, Can't set future date.");
             return;
         }
@@ -96,21 +120,23 @@ function App() {
                                 <div id="latitude-block">
                                     <span>Enter latitude:</span>
                                     <input
-                                        type="text"
+                                        type="number"
                                         value={latitude}
                                         onChange={(e) =>
                                             updateLatitude(e.target.value)
                                         }
+                                        placeholder="22.3119112"
                                     />
                                 </div>
                                 <div id="longitude-block">
                                     <span>Enter longitude:</span>
                                     <input
-                                        type="text"
+                                        type="number"
                                         value={longitude}
                                         onChange={(e) =>
                                             updateLongitude(e.target.value)
                                         }
+                                        placeholder="73.1674174"
                                     />
                                 </div>
                             </div>
