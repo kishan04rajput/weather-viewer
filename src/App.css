@@ -1,5 +1,10 @@
 #get-info-block {
     display: flex;
+    flex-direction: column;
+}
+
+#location-date-block {
+    display: flex;
     flex-direction: row;
 }
 
@@ -43,4 +48,8 @@
     gap: 1vh;
     flex: 1;
     margin: 1%;
+}
+
+#get-info {
+    align-self: center;
 }

@@ -1,228 +1,29 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
+import { qwerty } from "./qwerty.js";
 
 function App() {
-    const [isLoading, setIsLoading] = useState(true);
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [latitude, setLatitude] = useState(22.3119112);
+    const [longitude, setLongitude] = useState(73.1674174);
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
     const [data, setData] = useState(null);
-    const qwerty = {
-        latitude: 28.625,
-        longitude: 77.25,
-        generationtime_ms: 0.01811981201171875,
-        utc_offset_seconds: 19800,
-        timezone: "Asia/Kolkata",
-        timezone_abbreviation: "GMT+5:30",
-        elevation: 214,
-        hourly_units: {
-            time: "iso8601",
-            temperature_2m: "°C",
-        },
-        hourly: {
-            time: [
-                "2025-09-17T00:00",
-                "2025-09-17T01:00",
-                "2025-09-17T02:00",
-                "2025-09-17T03:00",
-                "2025-09-17T04:00",
-                "2025-09-17T05:00",
-                "2025-09-17T06:00",
-                "2025-09-17T07:00",
-                "2025-09-17T08:00",
-                "2025-09-17T09:00",
-                "2025-09-17T10:00",
-                "2025-09-17T11:00",
-                "2025-09-17T12:00",
-                "2025-09-17T13:00",
-                "2025-09-17T14:00",
-                "2025-09-17T15:00",
-                "2025-09-17T16:00",
-                "2025-09-17T17:00",
-                "2025-09-17T18:00",
-                "2025-09-17T19:00",
-                "2025-09-17T20:00",
-                "2025-09-17T21:00",
-                "2025-09-17T22:00",
-                "2025-09-17T23:00",
-                "2025-09-18T00:00",
-                "2025-09-18T01:00",
-                "2025-09-18T02:00",
-                "2025-09-18T03:00",
-                "2025-09-18T04:00",
-                "2025-09-18T05:00",
-                "2025-09-18T06:00",
-                "2025-09-18T07:00",
-                "2025-09-18T08:00",
-                "2025-09-18T09:00",
-                "2025-09-18T10:00",
-                "2025-09-18T11:00",
-                "2025-09-18T12:00",
-                "2025-09-18T13:00",
-                "2025-09-18T14:00",
-                "2025-09-18T15:00",
-                "2025-09-18T16:00",
-                "2025-09-18T17:00",
-                "2025-09-18T18:00",
-                "2025-09-18T19:00",
-                "2025-09-18T20:00",
-                "2025-09-18T21:00",
-                "2025-09-18T22:00",
-                "2025-09-18T23:00",
-                "2025-09-19T00:00",
-                "2025-09-19T01:00",
-                "2025-09-19T02:00",
-                "2025-09-19T03:00",
-                "2025-09-19T04:00",
-                "2025-09-19T05:00",
-                "2025-09-19T06:00",
-                "2025-09-19T07:00",
-                "2025-09-19T08:00",
-                "2025-09-19T09:00",
-                "2025-09-19T10:00",
-                "2025-09-19T11:00",
-                "2025-09-19T12:00",
-                "2025-09-19T13:00",
-                "2025-09-19T14:00",
-                "2025-09-19T15:00",
-                "2025-09-19T16:00",
-                "2025-09-19T17:00",
-                "2025-09-19T18:00",
-                "2025-09-19T19:00",
-                "2025-09-19T20:00",
-                "2025-09-19T21:00",
-                "2025-09-19T22:00",
-                "2025-09-19T23:00",
-                "2025-09-20T00:00",
-                "2025-09-20T01:00",
-                "2025-09-20T02:00",
-                "2025-09-20T03:00",
-                "2025-09-20T04:00",
-                "2025-09-20T05:00",
-                "2025-09-20T06:00",
-                "2025-09-20T07:00",
-                "2025-09-20T08:00",
-                "2025-09-20T09:00",
-                "2025-09-20T10:00",
-                "2025-09-20T11:00",
-                "2025-09-20T12:00",
-                "2025-09-20T13:00",
-                "2025-09-20T14:00",
-                "2025-09-20T15:00",
-                "2025-09-20T16:00",
-                "2025-09-20T17:00",
-                "2025-09-20T18:00",
-                "2025-09-20T19:00",
-                "2025-09-20T20:00",
-                "2025-09-20T21:00",
-                "2025-09-20T22:00",
-                "2025-09-20T23:00",
-                "2025-09-21T00:00",
-                "2025-09-21T01:00",
-                "2025-09-21T02:00",
-                "2025-09-21T03:00",
-                "2025-09-21T04:00",
-                "2025-09-21T05:00",
-                "2025-09-21T06:00",
-                "2025-09-21T07:00",
-                "2025-09-21T08:00",
-                "2025-09-21T09:00",
-                "2025-09-21T10:00",
-                "2025-09-21T11:00",
-                "2025-09-21T12:00",
-                "2025-09-21T13:00",
-                "2025-09-21T14:00",
-                "2025-09-21T15:00",
-                "2025-09-21T16:00",
-                "2025-09-21T17:00",
-                "2025-09-21T18:00",
-                "2025-09-21T19:00",
-                "2025-09-21T20:00",
-                "2025-09-21T21:00",
-                "2025-09-21T22:00",
-                "2025-09-21T23:00",
-                "2025-09-22T00:00",
-                "2025-09-22T01:00",
-                "2025-09-22T02:00",
-                "2025-09-22T03:00",
-                "2025-09-22T04:00",
-                "2025-09-22T05:00",
-                "2025-09-22T06:00",
-                "2025-09-22T07:00",
-                "2025-09-22T08:00",
-                "2025-09-22T09:00",
-                "2025-09-22T10:00",
-                "2025-09-22T11:00",
-                "2025-09-22T12:00",
-                "2025-09-22T13:00",
-                "2025-09-22T14:00",
-                "2025-09-22T15:00",
-                "2025-09-22T16:00",
-                "2025-09-22T17:00",
-                "2025-09-22T18:00",
-                "2025-09-22T19:00",
-                "2025-09-22T20:00",
-                "2025-09-22T21:00",
-                "2025-09-22T22:00",
-                "2025-09-22T23:00",
-                "2025-09-23T00:00",
-                "2025-09-23T01:00",
-                "2025-09-23T02:00",
-                "2025-09-23T03:00",
-                "2025-09-23T04:00",
-                "2025-09-23T05:00",
-                "2025-09-23T06:00",
-                "2025-09-23T07:00",
-                "2025-09-23T08:00",
-                "2025-09-23T09:00",
-                "2025-09-23T10:00",
-                "2025-09-23T11:00",
-                "2025-09-23T12:00",
-                "2025-09-23T13:00",
-                "2025-09-23T14:00",
-                "2025-09-23T15:00",
-                "2025-09-23T16:00",
-                "2025-09-23T17:00",
-                "2025-09-23T18:00",
-                "2025-09-23T19:00",
-                "2025-09-23T20:00",
-                "2025-09-23T21:00",
-                "2025-09-23T22:00",
-                "2025-09-23T23:00",
-            ],
-            temperature_2m: [
-                28.5, 28.2, 27.7, 27.1, 26.7, 27.3, 27.1, 27.4, 28.3, 29, 29.2,
-                32, 32.7, 33.2, 33.2, 33.2, 32.8, 31.9, 30.5, 29.7, 28.6, 28.2,
-                27.9, 27.6, 27.4, 27.1, 26.8, 26.5, 26.3, 26, 25.9, 26.4, 27.6,
-                28.9, 30.4, 31.8, 32.2, 32.7, 33.2, 33, 32.7, 31.9, 30.3, 29.4,
-                28.9, 28.3, 27.8, 27.4, 27, 26.7, 26.4, 26.1, 25.9, 25.8, 25.7,
-                26.2, 27, 28.1, 29.7, 30.8, 31.6, 32.3, 32.8, 33.2, 32.8, 32.2,
-                31, 30.2, 29.4, 28.6, 27.9, 27.5, 27.1, 26.8, 26.5, 26.3, 26.1,
-                25.9, 25.8, 26.4, 27.8, 29.8, 30.9, 32, 33.1, 33.9, 34.4, 34.5,
-                34.2, 33.2, 32.3, 31.1, 30.2, 29.6, 29.2, 28.8, 28.4, 28.1,
-                27.8, 27.3, 26.9, 26.8, 27.1, 27.8, 28.8, 30.3, 32, 33.4, 34.2,
-                34.6, 34.7, 34.5, 34.1, 33.4, 32.6, 31.6, 30.8, 30.2, 29.8,
-                29.3, 28.7, 28, 27.5, 27.1, 26.8, 26.8, 27.3, 28.2, 29.4, 31,
-                32.9, 34.2, 35.1, 35.6, 35.9, 35.7, 35.1, 34.4, 33.5, 32.5,
-                31.5, 30.6, 29.8, 29.1, 28.6, 28.2, 27.8, 27.5, 27.2, 27.2,
-                27.6, 28.3, 29.3, 30.8, 32.7, 34.2, 35.2, 35.9, 36.3, 36.1,
-                35.6, 34.9, 33.8, 32.5, 31.4, 30.4, 29.5, 28.8,
-            ],
-        },
-    };
 
     const fetchData = async () => {
+        if (!latitude || !longitude || !fromDate || !toDate) {
+            console.error("Please fill all data....");
+            return;
+        }
         setIsLoading(true);
         try {
-            // const response = await axios.get(
-            //     "https://api.open-meteo.com/v1/forecast?latitude=28.6139&longitude=77.2090&hourly=temperature_2m&timezone=Asia/Kolkata"
-            // );
-            const response = await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(qwerty);
-                }, 1000);
+            const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_max,apparent_temperature_min,apparent_temperature_mean&start_date=${fromDate}&end_date=${toDate}&timezone=Asia/Kolkata`;
+
+            // const response = await axios.get(apiUrl);
+            const response = qwerty;
+            await new Promise((resolve, reject) => {
+                setTimeout(() => resolve(), 1000);
             });
             setData(response);
             console.log(response);
@@ -234,7 +35,7 @@ function App() {
     };
 
     useEffect(() => {
-        fetchData();
+        // fetchData();
     }, []);
 
     return (
@@ -245,52 +46,60 @@ function App() {
                 <div id="main-container">
                     {/* get info block */}
                     <div id="get-info-block">
-                        {/* location block */}
-                        <div id="location-block">
-                            <h1>Location</h1>
-                            <div id="latitude-block">
-                                <span>Enter latitude:</span>
-                                <input
-                                    type="text"
-                                    value={latitude}
-                                    onChange={(e) =>
-                                        setLatitude(e.target.value)
-                                    }
-                                />
+                        <div id="location-date-block">
+                            {/* location block */}
+                            <div id="location-block">
+                                <h1>Location</h1>
+                                <div id="latitude-block">
+                                    <span>Enter latitude:</span>
+                                    <input
+                                        type="text"
+                                        value={latitude}
+                                        onChange={(e) =>
+                                            setLatitude(e.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div id="longitude-block">
+                                    <span>Enter longitude:</span>
+                                    <input
+                                        type="text"
+                                        value={longitude}
+                                        onChange={(e) =>
+                                            setLongitude(e.target.value)
+                                        }
+                                    />
+                                </div>
                             </div>
-                            <div id="longitude-block">
-                                <span>Enter longitude:</span>
-                                <input
-                                    type="text"
-                                    value={longitude}
-                                    onChange={(e) =>
-                                        setLongitude(e.target.value)
-                                    }
-                                />
+                            {/* date block */}
+                            <div id="date-block">
+                                <h1>Date</h1>
+                                <div id="from-date-block">
+                                    <span>From:</span>
+                                    <input
+                                        type="date"
+                                        value={fromDate}
+                                        onChange={(e) =>
+                                            setFromDate(e.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div id="to-date-block">
+                                    <span>To:</span>
+                                    <input
+                                        type="date"
+                                        value={toDate}
+                                        onChange={(e) =>
+                                            setToDate(e.target.value)
+                                        }
+                                    />
+                                </div>
                             </div>
                         </div>
-                        {/* date block */}
-                        <div id="date-block">
-                            <h1>Date</h1>
-                            <div id="from-date-block">
-                                <span>From date:</span>
-                                <input
-                                    type="date"
-                                    value={fromDate}
-                                    onChange={(e) =>
-                                        setFromDate(e.target.value)
-                                    }
-                                />
-                            </div>
-                            <div id="to-date-block">
-                                <span>To date:</span>
-                                <input
-                                    type="date"
-                                    value={toDate}
-                                    onChange={(e) => setToDate(e.target.value)}
-                                />
-                            </div>
-                        </div>
+
+                        <button id="get-info" onClick={fetchData}>
+                            GET INFO
+                        </button>
                     </div>
                     <div id="display-info-block">
                         <span>Display info block</span>
