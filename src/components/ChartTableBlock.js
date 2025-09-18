@@ -4,7 +4,7 @@ import { ChartComponent } from "./ChartComponent";
 import { TableComponent } from "./TableComponent";
 
 const ChartTableBlock = ({ data }) => {
-    const [displayMode, setDisplayMode] = useState("");
+    const [displayMode, setDisplayMode] = useState("table");
 
     const displayChart = () => {
         if (displayMode === "chart") {
@@ -27,10 +27,6 @@ const ChartTableBlock = ({ data }) => {
             .getElementById("chart-button")
             .classList.remove("active-button");
     };
-
-    useEffect(() => {
-        displayTable();
-    }, []);
 
     return (
         <div>
