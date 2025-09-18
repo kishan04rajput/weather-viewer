@@ -82,7 +82,7 @@ function App() {
                             GET INFO
                         </button>
                     </div>
-                    <div className="flex flex-col border border-gray-400 rounded-[10px] m-[1%] p-[1%]">
+                    <div className="flex flex-col m-[1%]">
                         <ChartTableBlock data={data} />
                     </div>
                 </div>

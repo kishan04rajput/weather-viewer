@@ -30,34 +30,30 @@ const ChartTableBlock = ({ data }) => {
     return (
         <div>
             {data && (
-                <div className="flex flex-col justify-center">
+                <div className="flex border border-gray-400 rounded-[10px] p-[1%] flex-col justify-center">
                     <div className="flex flex-row gap-[1vw] justify-center">
-                        <span
+                        <button
                             onClick={displayChart}
-                            className="cursor-pointer border border-gray-300 px-[2%] py-[1%] rounded-lg hover:bg-gray-200"
-                            style={{
-                                backgroundColor:
-                                    displayMode === "chart"
-                                        ? "lightgrey"
-                                        : "white",
-                            }}
+                            className={`border border-gray-300 px-[2%] py-[1%] rounded-lg transition-colors duration-200 ${
+                                displayMode === "chart"
+                                    ? "bg-gray-300 hover:bg-gray-400"
+                                    : "bg-white hover:bg-gray-200"
+                            }`}
                             id="chart-button"
                         >
                             Chart
-                        </span>
-                        <span
+                        </button>
+                        <button
                             onClick={displayTable}
-                            className="cursor-pointer border border-gray-300 px-[2%] py-[1%] rounded-lg hover:bg-gray-200"
-                            style={{
-                                backgroundColor:
-                                    displayMode === "table"
-                                        ? "lightgrey"
-                                        : "white",
-                            }}
+                            className={`border border-gray-300 px-[2%] py-[1%] rounded-lg transition-colors duration-200 ${
+                                displayMode === "table"
+                                    ? "bg-gray-300 hover:bg-gray-400"
+                                    : "bg-white hover:bg-gray-200"
+                            }`}
                             id="table-button"
                         >
                             Table
-                        </span>
+                        </button>
                     </div>
                     {displayMode === "chart" ? (
                         <div>
