@@ -3,53 +3,6 @@
     flex-direction: column;
 }
 
-#location-date-block {
-    display: flex;
-    flex-direction: row;
-}
-
-#location-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 50%;
-    gap: 1vh;
-    flex: 1;
-    margin: 1%;
-}
-
-#latitude-block {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#longitude-block {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#date-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 50%;
-    gap: 1vh;
-    flex: 1;
-    margin: 1%;
-}
-
 #get-info {
     align-self: center;
 }
