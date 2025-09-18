@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./ChartTableBlock.css";
 import { ChartComponent } from "./ChartComponent";
 import { TableComponent } from "./TableComponent";
 
@@ -31,18 +30,30 @@ const ChartTableBlock = ({ data }) => {
     return (
         <div>
             {data && (
-                <div id="display-mode-block">
-                    <div id="display-mode-buttons">
+                <div className="flex flex-col justify-center">
+                    <div className="flex flex-row gap-[1vw] justify-center">
                         <span
                             onClick={displayChart}
-                            className="button"
+                            className="cursor-pointer border border-gray-300 px-[2%] py-[1%] rounded-lg hover:bg-gray-200"
+                            style={{
+                                backgroundColor:
+                                    displayMode === "chart"
+                                        ? "lightgrey"
+                                        : "white",
+                            }}
                             id="chart-button"
                         >
                             Chart
                         </span>
                         <span
                             onClick={displayTable}
-                            className="button"
+                            className="cursor-pointer border border-gray-300 px-[2%] py-[1%] rounded-lg hover:bg-gray-200"
+                            style={{
+                                backgroundColor:
+                                    displayMode === "table"
+                                        ? "lightgrey"
+                                        : "white",
+                            }}
                             id="table-button"
                         >
                             Table

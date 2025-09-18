@@ -1,5 +1,4 @@
 import React from "react";
-import "./LocationDateBlock.css";
 import { isFutureDate } from "../utils/isFutureDate";
 import { isValidLongitude } from "../utils/isValidLongitude";
 import { isValidLatitude } from "../utils/isValidLatitude";
@@ -46,11 +45,11 @@ const LocationDateBlock = ({
     };
 
     return (
-        <div id="location-date-block">
+        <div className="flex flex-row gap-[1vw]">
             {/* location block */}
-            <div id="location-block">
+            <div className="flex flex-col items-center justify-center border border-gray-400 p-2.5 rounded-[10px] max-w-1/2 gap-[1vh] flex-1">
                 <h1>Location</h1>
-                <div id="latitude-block">
+                <div className="flex flex-row items-center justify-center">
                     <span>Enter latitude:</span>
                     <input
                         type="number"
@@ -59,7 +58,7 @@ const LocationDateBlock = ({
                         placeholder="22.3119112"
                     />
                 </div>
-                <div id="longitude-block">
+                <div className="flex flex-row items-center justify-center">
                     <span>Enter longitude:</span>
                     <input
                         type="number"
@@ -70,7 +69,7 @@ const LocationDateBlock = ({
                 </div>
             </div>
             {/* date block */}
-            <div id="date-block">
+            <div className="flex flex-col items-center justify-center border border-gray-400 p-2.5 rounded-[10px] max-w-1/2 gap-[1vh] flex-1">
                 <h1>Date</h1>
                 <div id="from-date-block">
                     <span>From:</span>
