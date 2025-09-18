@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./ChartTableBlock.css";
+import { ChartComponent } from "./ChartComponent";
+import { TableComponent } from "./TableComponent";
+
 const ChartTableBlock = ({ data }) => {
     const [displayMode, setDisplayMode] = useState("chart");
 
@@ -13,6 +16,7 @@ const ChartTableBlock = ({ data }) => {
             .getElementById("table-button")
             .classList.remove("active-button");
     };
+
     const displayTable = () => {
         if (displayMode === "table") {
             return;
@@ -23,6 +27,7 @@ const ChartTableBlock = ({ data }) => {
             .getElementById("chart-button")
             .classList.remove("active-button");
     };
+
     return (
         <div>
             {data && (
@@ -45,11 +50,11 @@ const ChartTableBlock = ({ data }) => {
                     </div>
                     {displayMode === "chart" ? (
                         <div>
-                            <h1>Chart</h1>
+                            <ChartComponent data={data} />
                         </div>
                     ) : (
                         <div>
-                            <h1>Table</h1>
+                            <TableComponent data={data} />
                         </div>
                     )}
                 </div>
