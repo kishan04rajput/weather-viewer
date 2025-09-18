@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import axios from "axios";
 import { qwerty } from "./qwerty.js";
 import LocationDateBlock from "./components/LocationDateBlock.js";
@@ -67,7 +66,7 @@ function App() {
             ) : (
                 <div id="main-container">
                     {/* get info block */}
-                    <div id="get-info-block">
+                    <div className="flex flex-col border border-gray-400 rounded-[10px] m-[1%] p-[1%] gap-[1vh]">
                         <LocationDateBlock
                             latitude={latitude}
                             longitude={longitude}
@@ -79,11 +78,11 @@ function App() {
                             setToDate={setToDate}
                         />
 
-                        <button id="get-info" onClick={fetchData}>
+                        <button className="self-center" onClick={fetchData}>
                             GET INFO
                         </button>
                     </div>
-                    <div id="display-info-block">
+                    <div className="flex flex-col border border-gray-400 rounded-[10px] m-[1%] p-[1%]">
                         <ChartTableBlock data={data} />
                     </div>
                 </div>
