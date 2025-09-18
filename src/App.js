@@ -78,7 +78,10 @@ function App() {
                             setToDate={setToDate}
                         />
 
-                        <button className="self-center" onClick={fetchData}>
+                        <button
+                            className="self-center border border-gray-400 rounded-[10px] px-[2%] py-[1%] hover:bg-gray-200"
+                            onClick={fetchData}
+                        >
                             GET INFO
                         </button>
                     </div>
