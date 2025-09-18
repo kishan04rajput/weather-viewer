@@ -1,5 +1,6 @@
 import React from "react";
 import "./LocationDateBlock.css";
+import { isFutureDate } from "../utils/isFutureDate";
 
 const LocationDateBlock = ({
     latitude,
@@ -27,17 +28,12 @@ const LocationDateBlock = ({
         setLongitude(value);
     };
 
-    const isFutureDate = (value) => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        const selectedDate = new Date(value);
-        selectedDate.setHours(0, 0, 0, 0);
-
-        if (selectedDate.getTime() > today.getTime()) {
-            return true;
+    const updateFromDate = (value) => {
+        if (isFutureDate(value)) {
+            window.alert("Error, Can't set future date.");
+            return;
         }
-        return false;
+        setFromDate(value);
     };
 
     const updateToDate = (value) => {
@@ -81,7 +77,7 @@ const LocationDateBlock = ({
                     <input
                         type="date"
                         value={fromDate}
-                        onChange={(e) => setFromDate(e.target.value)}
+                        onChange={(e) => updateFromDate(e.target.value)}
                     />
                 </div>
                 <div id="to-date-block">

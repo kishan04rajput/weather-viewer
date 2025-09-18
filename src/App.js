@@ -2,8 +2,9 @@ import { useState } from "react";
 import "./App.css";
 import axios from "axios";
 import { qwerty } from "./qwerty.js";
-import LocationDateBlock from "./components/LocationDateBlock";
-import { addDelay } from "./utils/addDelay";
+import LocationDateBlock from "./components/LocationDateBlock.js";
+import { addDelay } from "./utils/addDelay.js";
+import ChartTableBlock from "./components/ChartTableBlock.js";
 
 function App() {
     const [isLoading, setIsLoading] = useState(false);
@@ -83,7 +84,7 @@ function App() {
                         </button>
                     </div>
                     <div id="display-info-block">
-                        <span>Display info block</span>
+                        <ChartTableBlock data={data} />
                     </div>
                 </div>
             )}
