@@ -45,7 +45,7 @@ const LocationDateBlock = ({
     };
 
     return (
-        <div className="flex flex-row gap-[1vw]">
+        <div className="flex flex-col gap-[1vh] sm:flex-row sm:gap-[1vw]">
             {/* location block */}
             <div className="flex flex-col items-center justify-center border border-gray-400 p-2.5 rounded-[10px] max-w-1/2 gap-[1vh] flex-1">
                 <h1>Location</h1>

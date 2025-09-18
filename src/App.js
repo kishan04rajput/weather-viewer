@@ -64,9 +64,9 @@ function App() {
             {isLoading ? (
                 <h1>Loading...</h1>
             ) : (
-                <div id="main-container">
+                <div className="flex flex-col gap-[1vh] p-[1%] min-w-min min-h-min">
                     {/* get info block */}
-                    <div className="flex flex-col border border-gray-400 rounded-[10px] m-[1%] p-[1%] gap-[1vh]">
+                    <div className="flex flex-col border border-gray-400 rounded-[10px] p-[1%] gap-[1vh]">
                         <LocationDateBlock
                             latitude={latitude}
                             longitude={longitude}
@@ -85,7 +85,7 @@ function App() {
                             GET INFO
                         </button>
                     </div>
-                    <div className="flex flex-col m-[1%]">
+                    <div className="flex flex-col">
                         <ChartTableBlock data={data} />
                     </div>
                 </div>
