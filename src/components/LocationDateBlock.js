@@ -1,6 +1,8 @@
 import React from "react";
 import "./LocationDateBlock.css";
 import { isFutureDate } from "../utils/isFutureDate";
+import { isValidLongitude } from "../utils/isValidLongitude";
+import { isValidLatitude } from "../utils/isValidLatitude";
 
 const LocationDateBlock = ({
     latitude,
@@ -13,16 +15,14 @@ const LocationDateBlock = ({
     setToDate,
 }) => {
     const updateLatitude = (value) => {
-        if (value > 90 || value < -90) {
-            window.alert("Latitude can be between +90 to -90 only");
+        if (!isValidLatitude(value)) {
             return;
         }
         setLatitude(value);
     };
 
     const updateLongitude = (value) => {
-        if (value > 180 || value < -180) {
-            window.alert("Longitude can be between +180 to -180 only");
+        if (!isValidLongitude(value)) {
             return;
         }
         setLongitude(value);
