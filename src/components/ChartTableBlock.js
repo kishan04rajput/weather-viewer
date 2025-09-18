@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./ChartTableBlock.css";
 import { ChartComponent } from "./ChartComponent";
 import { TableComponent } from "./TableComponent";
 
 const ChartTableBlock = ({ data }) => {
-    const [displayMode, setDisplayMode] = useState("chart");
+    const [displayMode, setDisplayMode] = useState("");
 
     const displayChart = () => {
         if (displayMode === "chart") {
@@ -27,6 +27,10 @@ const ChartTableBlock = ({ data }) => {
             .getElementById("chart-button")
             .classList.remove("active-button");
     };
+
+    useEffect(() => {
+        displayTable();
+    }, []);
 
     return (
         <div>
