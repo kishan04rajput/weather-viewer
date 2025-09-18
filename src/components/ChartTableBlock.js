@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./ChartTableBlock.css";
 import { ChartComponent } from "./ChartComponent";
 import { TableComponent } from "./TableComponent";
