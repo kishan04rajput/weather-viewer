@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import { qwerty } from "./qwerty.js";
 import LocationDateBlock from "./components/LocationDateBlock";
+import { addDelay } from "./utils/addDelay";
 
 function App() {
     const [isLoading, setIsLoading] = useState(false);
@@ -11,12 +12,6 @@ function App() {
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
     const [data, setData] = useState(null);
-
-    const addDelay = async (value) => {
-        await new Promise((resolve, reject) => {
-            setTimeout(() => resolve(), value);
-        });
-    };
 
     const isInputValidated = () => {
         if (!latitude) {
