@@ -1,8 +1,22 @@
 #get-info-block {
     display: flex;
     flex-direction: column;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 1%;
+    padding: 1%;
+    gap: 1vh;
 }
 
 #get-info {
     align-self: center;
+}
+
+#display-info-block {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 10px;
 }

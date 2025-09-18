@@ -1,0 +1,31 @@
+#display-mode-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#display-mode-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    justify-content: center;
+}
+
+.button {
+    cursor: pointer;
+    border: 1px solid lightgrey;
+    padding: 1% 2%;
+    border-radius: 10px;
+}
+
+#chart-button:hover {
+    background-color: lightgrey;
+}
+
+#table-button:hover {
+    background-color: lightgrey;
+}
+
+.active-button {
+    background-color: lightgrey;
+}
