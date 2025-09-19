@@ -99,6 +99,7 @@ export const ChartComponent = ({ data }) => {
                         boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
                         padding: "10px",
                     }}
+                    wrapperStyle={{ zIndex: 1000 }}
                     labelStyle={{ fontWeight: "bold", marginBottom: "5px" }}
                 />
                 <Legend
@@ -107,6 +108,7 @@ export const ChartComponent = ({ data }) => {
                     wrapperStyle={{
                         paddingTop: isMobile ? "10px" : "20px",
                         fontSize: isMobile ? "10px" : "12px",
+                        zIndex: 100,
                     }}
                     iconType="circle"
                     layout={isMobile ? "vertical" : "horizontal"}
