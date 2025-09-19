@@ -152,6 +152,67 @@ export const TableComponent = ({ data }) => {
                             </div>
                         )
                 )}
+
+                {/* Mobile Pagination Controls - Bottom */}
+                <div className="bg-white rounded-lg shadow-sm p-3 mt-4">
+                    <div className="flex items-center justify-between mb-3">
+                        <button
+                            className="inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                            onClick={() => decreasePage()}
+                            disabled={page === 1}
+                        >
+                            <FaChevronLeft className="mr-1" /> Prev
+                        </button>
+
+                        <div className="flex items-center space-x-1">
+                            <span className="text-xs text-gray-700">Page</span>
+                            <input
+                                type="text"
+                                className="border border-gray-300 w-10 text-center rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                value={page}
+                                onChange={(e) =>
+                                    handleJumpToPage(parseInt(e.target.value))
+                                }
+                            />
+                            <span className="text-xs text-gray-700">
+                                of {Math.ceil(data.daily.time.length / perPage)}
+                            </span>
+                        </div>
+
+                        <button
+                            className="inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                            onClick={() => increasePage()}
+                            disabled={
+                                page >=
+                                Math.ceil(data.daily.time.length / perPage)
+                            }
+                        >
+                            Next <FaChevronRight className="ml-1" />
+                        </button>
+                    </div>
+
+                    <div className="flex items-center justify-center mt-3">
+                        <span className="text-xs text-gray-700 mr-2">Show</span>
+                        <select
+                            className="border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-xs py-1"
+                            value={perPage}
+                            onChange={(e) => setPerPage(e.target.value)}
+                        >
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            {data.daily.time.length > 15 && (
+                                <option value="30">30</option>
+                            )}
+                            {data.daily.time.length > 30 && (
+                                <option value="all">All</option>
+                            )}
+                        </select>
+                        <span className="text-xs text-gray-700 ml-2">
+                            per page
+                        </span>
+                    </div>
+                </div>
             </div>
         );
     };
