@@ -16,6 +16,8 @@ const LocationDateBlock = ({
 }) => {
     const [latitudeError, setLatitudeError] = useState("");
     const [longitudeError, setLongitudeError] = useState("");
+    const [fromDateError, setFromDateError] = useState("");
+    const [toDateError, setToDateError] = useState("");
 
     const updateLatitude = (value) => {
         if (!isValidLatitude(value)) {
@@ -35,9 +37,6 @@ const LocationDateBlock = ({
         setLongitude(value);
     };
 
-    const [fromDateError, setFromDateError] = useState("");
-    const [toDateError, setToDateError] = useState("");
-
     const updateFromDate = (value) => {
         if (isFutureDate(value)) {
             setFromDateError("Cannot set future date");
@@ -46,9 +45,9 @@ const LocationDateBlock = ({
         setFromDateError("");
         setFromDate(value);
 
-        // Check if from date is after to date
         if (value && toDate && value > toDate) {
-            setToDateError('"From date" cannot be after "To date"');
+            window.alert('"From date" cannot be after "To date"');
+            setFromDateError('"From date" cannot be after "To date"');
         } else {
             setToDateError("");
         }
@@ -60,8 +59,8 @@ const LocationDateBlock = ({
             return;
         }
 
-        // Check if to date is before from date
         if (value && fromDate && fromDate > value) {
+            window.alert('"To date" cannot be before "From date"');
             setToDateError('"To date" cannot be before "From date"');
             return;
         }
@@ -74,11 +73,12 @@ const LocationDateBlock = ({
         <div className="flex flex-col gap-6 md:flex-row md:gap-6">
             {/* location block */}
             <div className="flex flex-col border border-gray-200 bg-white p-6 rounded-xl shadow-sm max-w-1/2 gap-4 flex-1">
+                {/* location block title */}
                 <div className="flex items-center mb-2 text-blue-700">
                     <FaMapMarkerAlt className="mr-2" />
                     <h2 className="text-xl font-semibold">Location</h2>
                 </div>
-
+                {/* latitude input */}
                 <div className="flex flex-col space-y-1">
                     <label
                         htmlFor="latitude"
@@ -91,7 +91,7 @@ const LocationDateBlock = ({
                         type="number"
                         value={latitude}
                         onChange={(e) => updateLatitude(e.target.value)}
-                        placeholder="22.3119112"
+                        placeholder="+90 to -90"
                         className={`px-3 py-2 border ${
                             latitudeError ? "border-red-500" : "border-gray-300"
                         } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
@@ -102,7 +102,7 @@ const LocationDateBlock = ({
                         </p>
                     )}
                 </div>
-
+                {/* longitude input */}
                 <div className="flex flex-col space-y-1">
                     <label
                         htmlFor="longitude"
@@ -115,7 +115,7 @@ const LocationDateBlock = ({
                         type="number"
                         value={longitude}
                         onChange={(e) => updateLongitude(e.target.value)}
-                        placeholder="73.1674174"
+                        placeholder="+180 to -180"
                         className={`px-3 py-2 border ${
                             longitudeError
                                 ? "border-red-500"
@@ -132,11 +132,12 @@ const LocationDateBlock = ({
 
             {/* date block */}
             <div className="flex flex-col border border-gray-200 bg-white p-6 rounded-xl shadow-sm max-w-1/2 gap-4 flex-1">
+                {/* date block title */}
                 <div className="flex items-center mb-2 text-blue-700">
                     <FaCalendarAlt className="mr-2" />
                     <h2 className="text-xl font-semibold">Date Range</h2>
                 </div>
-
+                {/* from date input */}
                 <div className="flex flex-col space-y-1">
                     <label
                         htmlFor="from-date"
@@ -159,7 +160,7 @@ const LocationDateBlock = ({
                         </p>
                     )}
                 </div>
-
+                {/* to date input */}
                 <div className="flex flex-col space-y-1">
                     <label
                         htmlFor="to-date"
