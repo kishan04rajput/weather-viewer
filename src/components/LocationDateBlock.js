@@ -41,16 +41,18 @@ const LocationDateBlock = ({
         if (isFutureDate(value)) {
             setFromDateError("Cannot set future date");
             return;
-        }
-        setFromDateError("");
-        setFromDate(value);
-
-        if (value && toDate && value > toDate) {
+        } else if (value && toDate && value > toDate) {
             window.alert('"From date" cannot be after "To date"');
             setFromDateError('"From date" cannot be after "To date"');
-        } else {
-            setToDateError("");
+        } else if (value < "2025-06-18") {
+            window.alert("Cannot set date before 2025-06-18");
+            setFromDateError("Cannot set date before 2025-06-18");
+            setFromDate("2025-06-18");
+            return;
         }
+
+        setFromDateError("");
+        setFromDate(value);
     };
 
     const updateToDate = (value) => {

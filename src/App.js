@@ -49,13 +49,13 @@ function App() {
         try {
             setIsLoading(true);
             const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_max,apparent_temperature_min,apparent_temperature_mean&start_date=${fromDate}&end_date=${toDate}&timezone=Asia/Kolkata`;
-            const response = await axios.get(apiUrl);
-            // const response = mockResponse;  // for testing
+            // const response = await axios.get(apiUrl);
+            const response = mockResponse; // for testing
             setData(response.data);
             await addDelay(1000);
             console.log("API data:", response.data);
         } catch (error) {
-            console.error("Error fetching data from API", error);
+            console.error("Error fetching data from API", error.response.data);
             window.alert("Error fetching data from API");
         } finally {
             setIsLoading(false);
