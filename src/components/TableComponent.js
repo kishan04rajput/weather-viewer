@@ -112,7 +112,7 @@ export const TableComponent = ({ data }) => {
                                     {/* Apparent Temperature Section */}
                                     <div className="bg-orange-50 p-2 rounded">
                                         <h5 className="text-xs font-medium text-gray-500 mb-1">
-                                            Apparent
+                                            Apparent Temp.
                                         </h5>
                                         <div className="flex flex-col space-y-1">
                                             <div className="flex items-center justify-between text-sm">
