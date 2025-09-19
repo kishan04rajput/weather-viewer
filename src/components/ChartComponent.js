@@ -37,18 +37,13 @@ export const ChartComponent = ({ data }) => {
     }));
 
     return (
-        <ResponsiveContainer
-            width="100%"
-            height={isMobile ? 300 : 400}
-            className="mt-4"
-        >
+        <ResponsiveContainer width="100%" height={400} className="mt-4">
             <LineChart
                 data={chartData}
                 margin={{
-                    top: 10,
+                    top: isMobile ? 15 : 10,
                     right: isMobile ? 10 : 30,
                     left: isMobile ? 0 : 20,
-                    bottom: isMobile ? 60 : 30,
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
@@ -68,7 +63,16 @@ export const ChartComponent = ({ data }) => {
                 <YAxis
                     label={
                         isMobile
-                            ? null
+                            ? {
+                                  value: "°C",
+                                  position: "top",
+                                  offset: 5,
+                                  style: {
+                                      textAnchor: "middle",
+                                      fill: "#666",
+                                      fontSize: 13,
+                                  },
+                              }
                             : {
                                   value: "Temperature (°C)",
                                   angle: -90,
@@ -88,7 +92,7 @@ export const ChartComponent = ({ data }) => {
                     }}
                     tickLine={{ stroke: "#ccc" }}
                     axisLine={{ stroke: "#ccc" }}
-                    width={isMobile ? 30 : 60}
+                    width={isMobile ? 28 : 60}
                 />
                 <Tooltip
                     contentStyle={{
@@ -105,7 +109,7 @@ export const ChartComponent = ({ data }) => {
                     align="center"
                     verticalAlign="bottom"
                     wrapperStyle={{
-                        paddingTop: isMobile ? "10px" : "20px",
+                        paddingTop: "10px",
                         fontSize: isMobile ? "10px" : "12px",
                         zIndex: 100,
                     }}
