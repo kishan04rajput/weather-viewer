@@ -4,7 +4,7 @@ import { TableComponent } from "./TableComponent";
 import { FaChartLine, FaTable } from "react-icons/fa";
 
 const ChartTableBlock = ({ data }) => {
-    const [displayMode, setDisplayMode] = useState("table");
+    const [displayMode, setDisplayMode] = useState("chart");
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {

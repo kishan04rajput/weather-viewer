@@ -59,12 +59,12 @@ export const ChartComponent = ({ data }) => {
                     tick={{
                         fill: "#666",
                         fontSize: isMobile ? 10 : 12,
-                        angle: isMobile ? -45 : 0,
+                        angle: isMobile ? -45 : -45,
                         dy: isMobile ? 10 : 0,
                     }}
                     tickLine={{ stroke: "#ccc" }}
                     axisLine={{ stroke: "#ccc" }}
-                    interval={isMobile ? 1 : 0}
+                    // interval={isMobile ? 1 : 0}
                 />
                 <YAxis
                     label={
