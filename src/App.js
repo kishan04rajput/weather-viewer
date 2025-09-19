@@ -14,6 +14,7 @@ function App() {
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
     const [data, setData] = useState(null);
+    const [displayNumber, setDisplayNumber] = useState(false);
 
     const isInputValidated = () => {
         if (!latitude) {
@@ -85,16 +86,21 @@ function App() {
                                 <a
                                     href="#"
                                     className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
+                                    title="Download Resume"
                                 >
-                                    About
+                                    Resume
                                 </a>
                             </li>
                             <li>
                                 <a
                                     href="#"
                                     className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
+                                    title="kishan9rajput@gmail.com"
+                                    onClick={() => setDisplayNumber(true)}
                                 >
-                                    Contact
+                                    {displayNumber
+                                        ? "+91 8347223811"
+                                        : "Contact"}
                                 </a>
                             </li>
                         </ul>
