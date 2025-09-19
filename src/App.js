@@ -9,8 +9,8 @@ import { FooterComponent } from "./components/FooterComponent.js";
 
 function App() {
     const [isLoading, setIsLoading] = useState(false);
-    const [latitude, setLatitude] = useState("1");
-    const [longitude, setLongitude] = useState("1");
+    const [latitude, setLatitude] = useState("");
+    const [longitude, setLongitude] = useState("");
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
     const [data, setData] = useState(null);
@@ -100,8 +100,10 @@ function App() {
         try {
             setIsLoading(true);
             const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_max,apparent_temperature_min,apparent_temperature_mean&start_date=${fromDate}&end_date=${toDate}&timezone=Asia/Kolkata`;
-            // const response = await axios.get(apiUrl);
-            const response = mockResponse; // for testing
+            const response =
+                process.env.NODE_ENV === "development"
+                    ? mockResponse
+                    : await axios.get(apiUrl);
             await processResponse(response.data);
         } catch (error) {
             console.error("Error fetching data from API", error.response.data);
