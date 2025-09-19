@@ -21,10 +21,10 @@ export const ChartComponent = ({ data }) => {
     }));
 
     return (
-        <ResponsiveContainer width="100%" height={400}>
+        <ResponsiveContainer width="100%" height={400} className="mt-[1vh]">
             <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
+                <CartesianGrid strokeDasharray="5 5" />
+                <XAxis dataKey="date" textAnchor="end" height={70} />
                 <YAxis
                     label={{
                         value: "°C",
@@ -34,42 +34,51 @@ export const ChartComponent = ({ data }) => {
                     }}
                 />
                 <Tooltip />
-                <Legend />
+                <Legend align="center" verticalAlign="bottom" />
                 <Line
                     type="monotone"
                     dataKey="tempMax"
                     stroke="#ef4444"
                     name="Max Temp"
+                    dot={false}
                 />
                 <Line
                     type="monotone"
                     dataKey="tempMean"
                     stroke="#3b82f6"
                     name="Mean Temp"
+                    dot={false}
                 />
                 <Line
                     type="monotone"
                     dataKey="tempMin"
                     stroke="#10b981"
                     name="Min Temp"
+                    dot={false}
                 />
                 <Line
                     type="monotone"
                     dataKey="apparentTempMax"
                     stroke="#f59e0b"
                     name="Max Apparent Temp"
+                    strokeDasharray="5 5"
+                    dot={false}
                 />
                 <Line
                     type="monotone"
                     dataKey="apparentTempMean"
                     stroke="#a855f7"
                     name="Mean Apparent Temp"
+                    strokeDasharray="5 5"
+                    dot={false}
                 />
                 <Line
                     type="monotone"
                     dataKey="apparentTempMin"
                     stroke="#8C564B"
                     name="Min Apparent Temp"
+                    strokeDasharray="5 5"
+                    dot={false}
                 />
             </LineChart>
         </ResponsiveContainer>

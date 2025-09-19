@@ -31,6 +31,7 @@ const ChartTableBlock = ({ data }) => {
         <div>
             {data && (
                 <div className="flex border border-gray-400 rounded-[10px] p-[1%] flex-col justify-center">
+                    {/* Display Mode Buttons */}
                     <div className="flex flex-row gap-[1vw] justify-center">
                         <button
                             onClick={displayChart}
@@ -55,6 +56,7 @@ const ChartTableBlock = ({ data }) => {
                             Table
                         </button>
                     </div>
+                    {/* Display Mode Content */}
                     {displayMode === "chart" ? (
                         <div>
                             <ChartComponent data={data} />
