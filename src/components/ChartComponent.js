@@ -8,23 +8,10 @@ import {
     Legend,
     ResponsiveContainer,
 } from "recharts";
-import { useState, useEffect } from "react";
+import { useIsSmallScreen } from "../hooks/useIsSmallScreen";
 
 export const ChartComponent = ({ data }) => {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-
-    const isMobile = windowWidth < 640;
+    const isMobile = useIsSmallScreen();
 
     const chartData = data.daily.time.map((date, i) => ({
         date,

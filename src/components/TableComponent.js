@@ -5,26 +5,12 @@ import {
     FaTemperatureHigh,
     FaTemperatureLow,
 } from "react-icons/fa";
+import { useIsSmallScreen } from "../hooks/useIsSmallScreen";
 export const TableComponent = ({ data }) => {
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState("15");
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [showCompactView, setShowCompactView] = useState(false);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-            setShowCompactView(window.innerWidth < 768);
-        };
-
-        // Set initial state
-        handleResize();
-
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+    const isMobile = useIsSmallScreen();
 
     const decreasePage = () => {
         if (page === 1) {
@@ -215,7 +201,7 @@ export const TableComponent = ({ data }) => {
     return (
         <div className="flex flex-col items-center p-2 sm:p-4">
             <div className="overflow-x-auto w-full max-w-full">
-                {showCompactView ? (
+                {isMobile ? (
                     renderMobileView()
                 ) : (
                     <table className="min-w-full divide-y divide-gray-200 border-collapse shadow-sm">
