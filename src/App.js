@@ -66,7 +66,7 @@ function App() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100 min-w-[360px]">
             {/* Header */}
             <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 shadow-lg">
                 <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between">

@@ -74,25 +74,38 @@ export const TableComponent = ({ data }) => {
                                         <h5 className="text-xs font-medium text-gray-500 mb-1">
                                             Temperature
                                         </h5>
-                                        <div className="flex items-center justify-between text-sm">
-                                            <span className="text-red-600 font-medium flex items-center">
-                                                <FaTemperatureHigh className="mr-1" />{" "}
-                                                {
-                                                    data.daily
-                                                        .temperature_2m_max[
-                                                        index
-                                                    ]
-                                                }
-                                            </span>
-                                            <span className="text-green-600 font-medium flex items-center">
-                                                <FaTemperatureLow className="mr-1" />{" "}
-                                                {
-                                                    data.daily
-                                                        .temperature_2m_min[
-                                                        index
-                                                    ]
-                                                }
-                                            </span>
+                                        <div className="flex flex-col space-y-1">
+                                            <div className="flex items-center justify-between text-sm">
+                                                <span className="text-red-600 font-medium flex items-center">
+                                                    <FaTemperatureHigh className="mr-1" />{" "}
+                                                    {
+                                                        data.daily
+                                                            .temperature_2m_max[
+                                                            index
+                                                        ]
+                                                    }
+                                                </span>
+                                                <span className="text-green-600 font-medium flex items-center">
+                                                    <FaTemperatureLow className="mr-1" />{" "}
+                                                    {
+                                                        data.daily
+                                                            .temperature_2m_min[
+                                                            index
+                                                        ]
+                                                    }
+                                                </span>
+                                            </div>
+                                            <div className="text-center text-sm">
+                                                <span className="text-blue-600 font-medium">
+                                                    Mean:{" "}
+                                                    {
+                                                        data.daily
+                                                            .temperature_2m_mean[
+                                                            index
+                                                        ]
+                                                    }
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -101,25 +114,38 @@ export const TableComponent = ({ data }) => {
                                         <h5 className="text-xs font-medium text-gray-500 mb-1">
                                             Apparent
                                         </h5>
-                                        <div className="flex items-center justify-between text-sm">
-                                            <span className="text-red-600 font-medium flex items-center">
-                                                <FaTemperatureHigh className="mr-1" />{" "}
-                                                {
-                                                    data.daily
-                                                        .apparent_temperature_max[
-                                                        index
-                                                    ]
-                                                }
-                                            </span>
-                                            <span className="text-green-600 font-medium flex items-center">
-                                                <FaTemperatureLow className="mr-1" />{" "}
-                                                {
-                                                    data.daily
-                                                        .apparent_temperature_min[
-                                                        index
-                                                    ]
-                                                }
-                                            </span>
+                                        <div className="flex flex-col space-y-1">
+                                            <div className="flex items-center justify-between text-sm">
+                                                <span className="text-red-600 font-medium flex items-center">
+                                                    <FaTemperatureHigh className="mr-1" />{" "}
+                                                    {
+                                                        data.daily
+                                                            .apparent_temperature_max[
+                                                            index
+                                                        ]
+                                                    }
+                                                </span>
+                                                <span className="text-green-600 font-medium flex items-center">
+                                                    <FaTemperatureLow className="mr-1" />{" "}
+                                                    {
+                                                        data.daily
+                                                            .apparent_temperature_min[
+                                                            index
+                                                        ]
+                                                    }
+                                                </span>
+                                            </div>
+                                            <div className="text-center text-sm">
+                                                <span className="text-purple-600 font-medium">
+                                                    Mean:{" "}
+                                                    {
+                                                        data.daily
+                                                            .apparent_temperature_mean[
+                                                            index
+                                                        ]
+                                                    }
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
