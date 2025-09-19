@@ -4,17 +4,15 @@ import { qwerty } from "./qwerty.js";
 import LocationDateBlock from "./components/LocationDateBlock.js";
 import { addDelay } from "./utils/addDelay.js";
 import ChartTableBlock from "./components/ChartTableBlock.js";
-import { FaCloudSun } from "react-icons/fa";
+import { HeaderComponent } from "./components/HeaderComponent.js";
 
 function App() {
-    const appTitle = "Weather Viewer";
     const [isLoading, setIsLoading] = useState(false);
     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
     const [data, setData] = useState(null);
-    const [displayNumber, setDisplayNumber] = useState(false);
 
     const isInputValidated = () => {
         if (!latitude) {
@@ -47,17 +45,17 @@ function App() {
             return;
         }
 
-        setIsLoading(true);
-        const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_max,apparent_temperature_min,apparent_temperature_mean&start_date=${fromDate}&end_date=${toDate}&timezone=Asia/Kolkata`;
-
         try {
+            setIsLoading(true);
+            const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_max,apparent_temperature_min,apparent_temperature_mean&start_date=${fromDate}&end_date=${toDate}&timezone=Asia/Kolkata`;
             // const response = await axios.get(apiUrl);
-            await addDelay(1000);
             const response = qwerty;
             setData(response);
+            await addDelay(1000);
             console.log("API data:", response);
         } catch (error) {
             console.error("Error fetching data from API", error);
+            window.alert("Error fetching data from API");
         } finally {
             setIsLoading(false);
         }
@@ -66,48 +64,8 @@ function App() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100 min-w-[360px]">
             {/* Header */}
-            <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4 shadow-lg">
-                <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between">
-                    <div className="flex items-center space-x-2 mb-3 sm:mb-0">
-                        <FaCloudSun className="text-3xl text-yellow-300" />
-                        <h1 className="text-2xl font-bold">{appTitle}</h1>
-                    </div>
-                    <nav>
-                        <ul className="flex space-x-4 sm:space-x-6">
-                            <li>
-                                <a
-                                    href="#"
-                                    className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
-                                >
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
-                                    title="Download Resume"
-                                >
-                                    Resume
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="#"
-                                    className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
-                                    title="kishan9rajput@gmail.com"
-                                    onClick={() => setDisplayNumber(true)}
-                                >
-                                    {displayNumber
-                                        ? "+91 8347223811"
-                                        : "Contact"}
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
-
+            <HeaderComponent />
+            {/* Main Content */}
             <main className="container mx-auto py-4 sm:py-8 px-3 sm:px-4">
                 {isLoading ? (
                     <div className="flex justify-center items-center h-64">
@@ -135,6 +93,7 @@ function App() {
                                 Get Weather Data
                             </button>
                         </div>
+                        {/* display info block */}
                         <div className="flex flex-col">
                             <ChartTableBlock data={data} />
                         </div>
