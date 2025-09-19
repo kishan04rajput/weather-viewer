@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChartComponent } from "./ChartComponent";
 import { TableComponent } from "./TableComponent";
+import { FaChartLine, FaTable } from "react-icons/fa";
 
 const ChartTableBlock = ({ data }) => {
     const [displayMode, setDisplayMode] = useState("table");
@@ -30,42 +31,52 @@ const ChartTableBlock = ({ data }) => {
     return (
         <div>
             {data && (
-                <div className="flex border border-gray-400 rounded-[10px] p-[1%] flex-col justify-center">
+                <div className="flex border border-gray-200 bg-white rounded-xl p-6 shadow-md flex-col justify-center">
                     {/* Display Mode Buttons */}
-                    <div className="flex flex-row gap-[1vw] justify-center">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center mb-4 sm:mb-6">
                         <button
                             onClick={displayChart}
-                            className={`border border-gray-300 px-[2%] py-[1%] rounded-lg transition-colors duration-200 ${
+                            className={`flex items-center px-5 py-2 rounded-lg transition-colors duration-200 font-medium ${
                                 displayMode === "chart"
-                                    ? "bg-gray-300 hover:bg-gray-400"
-                                    : "bg-white hover:bg-gray-200"
+                                    ? "bg-blue-600 text-white shadow-sm"
+                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                             }`}
                             id="chart-button"
                         >
-                            Chart
+                            <FaChartLine className="mr-2" />
+                            Chart View
                         </button>
                         <button
                             onClick={displayTable}
-                            className={`border border-gray-300 px-[2%] py-[1%] rounded-lg transition-colors duration-200 ${
+                            className={`flex items-center px-5 py-2 rounded-lg transition-colors duration-200 font-medium ${
                                 displayMode === "table"
-                                    ? "bg-gray-300 hover:bg-gray-400"
-                                    : "bg-white hover:bg-gray-200"
+                                    ? "bg-blue-600 text-white shadow-sm"
+                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                             }`}
                             id="table-button"
                         >
-                            Table
+                            <FaTable className="mr-2" />
+                            Table View
                         </button>
                     </div>
                     {/* Display Mode Content */}
-                    {displayMode === "chart" ? (
-                        <div>
-                            <ChartComponent data={data} />
-                        </div>
-                    ) : (
-                        <div>
-                            <TableComponent data={data} />
-                        </div>
-                    )}
+                    <div className="bg-white rounded-lg overflow-hidden">
+                        {displayMode === "chart" ? (
+                            <div className="p-2">
+                                <h3 className="text-lg font-medium text-gray-800 mb-4 text-center">
+                                    Temperature Data Chart
+                                </h3>
+                                <ChartComponent data={data} />
+                            </div>
+                        ) : (
+                            <div>
+                                <h3 className="text-lg font-medium text-gray-800 mb-4 text-center">
+                                    Temperature Data Table
+                                </h3>
+                                <TableComponent data={data} />
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
         </div>

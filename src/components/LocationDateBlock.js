@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { isFutureDate } from "../utils/isFutureDate";
 import { isValidLongitude } from "../utils/isValidLongitude";
 import { isValidLatitude } from "../utils/isValidLatitude";
+import { FaMapMarkerAlt, FaCalendarAlt } from "react-icons/fa";
 
 const LocationDateBlock = ({
     latitude,
@@ -13,79 +14,173 @@ const LocationDateBlock = ({
     setFromDate,
     setToDate,
 }) => {
+    const [latitudeError, setLatitudeError] = useState("");
+    const [longitudeError, setLongitudeError] = useState("");
+
     const updateLatitude = (value) => {
         if (!isValidLatitude(value)) {
+            setLatitudeError("Please enter a valid latitude (-90 to 90)");
             return;
         }
+        setLatitudeError("");
         setLatitude(value);
     };
 
     const updateLongitude = (value) => {
         if (!isValidLongitude(value)) {
+            setLongitudeError("Please enter a valid longitude (-180 to 180)");
             return;
         }
+        setLongitudeError("");
         setLongitude(value);
     };
 
+    const [fromDateError, setFromDateError] = useState("");
+    const [toDateError, setToDateError] = useState("");
+
     const updateFromDate = (value) => {
         if (isFutureDate(value)) {
-            window.alert("Error, Can't set future date.");
+            setFromDateError("Cannot set future date");
             return;
         }
+        setFromDateError("");
         setFromDate(value);
+
+        // Check if from date is after to date
+        if (value && toDate && value > toDate) {
+            setToDateError('"From date" cannot be after "To date"');
+        } else {
+            setToDateError("");
+        }
     };
 
     const updateToDate = (value) => {
         if (isFutureDate(value)) {
-            window.alert("Error, Can't set future date.");
+            setToDateError("Cannot set future date");
             return;
         }
 
+        // Check if to date is before from date
+        if (value && fromDate && fromDate > value) {
+            setToDateError('"To date" cannot be before "From date"');
+            return;
+        }
+
+        setToDateError("");
         setToDate(value);
     };
 
     return (
-        <div className="flex flex-col gap-[1vh] sm:flex-row sm:gap-[1vw]">
+        <div className="flex flex-col gap-6 md:flex-row md:gap-6">
             {/* location block */}
-            <div className="flex flex-col items-center justify-center border border-gray-400 p-2.5 rounded-[10px] max-w-1/2 gap-[1vh] flex-1">
-                <h1>Location</h1>
-                <div className="flex flex-row items-center justify-center">
-                    <span>Enter latitude:</span>
+            <div className="flex flex-col border border-gray-200 bg-white p-6 rounded-xl shadow-sm max-w-1/2 gap-4 flex-1">
+                <div className="flex items-center mb-2 text-blue-700">
+                    <FaMapMarkerAlt className="mr-2" />
+                    <h2 className="text-xl font-semibold">Location</h2>
+                </div>
+
+                <div className="flex flex-col space-y-1">
+                    <label
+                        htmlFor="latitude"
+                        className="text-sm font-medium text-gray-700"
+                    >
+                        Latitude
+                    </label>
                     <input
+                        id="latitude"
                         type="number"
                         value={latitude}
                         onChange={(e) => updateLatitude(e.target.value)}
                         placeholder="22.3119112"
+                        className={`px-3 py-2 border ${
+                            latitudeError ? "border-red-500" : "border-gray-300"
+                        } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                     />
+                    {latitudeError && (
+                        <p className="text-red-500 text-xs mt-1">
+                            {latitudeError}
+                        </p>
+                    )}
                 </div>
-                <div className="flex flex-row items-center justify-center">
-                    <span>Enter longitude:</span>
+
+                <div className="flex flex-col space-y-1">
+                    <label
+                        htmlFor="longitude"
+                        className="text-sm font-medium text-gray-700"
+                    >
+                        Longitude
+                    </label>
                     <input
+                        id="longitude"
                         type="number"
                         value={longitude}
                         onChange={(e) => updateLongitude(e.target.value)}
                         placeholder="73.1674174"
+                        className={`px-3 py-2 border ${
+                            longitudeError
+                                ? "border-red-500"
+                                : "border-gray-300"
+                        } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                     />
+                    {longitudeError && (
+                        <p className="text-red-500 text-xs mt-1">
+                            {longitudeError}
+                        </p>
+                    )}
                 </div>
             </div>
+
             {/* date block */}
-            <div className="flex flex-col items-center justify-center border border-gray-400 p-2.5 rounded-[10px] max-w-1/2 gap-[1vh] flex-1">
-                <h1>Date</h1>
-                <div id="from-date-block">
-                    <span>From:</span>
+            <div className="flex flex-col border border-gray-200 bg-white p-6 rounded-xl shadow-sm max-w-1/2 gap-4 flex-1">
+                <div className="flex items-center mb-2 text-blue-700">
+                    <FaCalendarAlt className="mr-2" />
+                    <h2 className="text-xl font-semibold">Date Range</h2>
+                </div>
+
+                <div className="flex flex-col space-y-1">
+                    <label
+                        htmlFor="from-date"
+                        className="text-sm font-medium text-gray-700"
+                    >
+                        From
+                    </label>
                     <input
+                        id="from-date"
                         type="date"
                         value={fromDate}
                         onChange={(e) => updateFromDate(e.target.value)}
+                        className={`px-3 py-2 border ${
+                            fromDateError ? "border-red-500" : "border-gray-300"
+                        } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                     />
+                    {fromDateError && (
+                        <p className="text-red-500 text-xs mt-1">
+                            {fromDateError}
+                        </p>
+                    )}
                 </div>
-                <div id="to-date-block">
-                    <span>To:</span>
+
+                <div className="flex flex-col space-y-1">
+                    <label
+                        htmlFor="to-date"
+                        className="text-sm font-medium text-gray-700"
+                    >
+                        To
+                    </label>
                     <input
+                        id="to-date"
                         type="date"
                         value={toDate}
                         onChange={(e) => updateToDate(e.target.value)}
+                        className={`px-3 py-2 border ${
+                            toDateError ? "border-red-500" : "border-gray-300"
+                        } rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                     />
+                    {toDateError && (
+                        <p className="text-red-500 text-xs mt-1">
+                            {toDateError}
+                        </p>
+                    )}
                 </div>
             </div>
         </div>

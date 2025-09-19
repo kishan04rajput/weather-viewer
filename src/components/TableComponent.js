@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 export const TableComponent = ({ data }) => {
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState("15");
@@ -28,154 +29,189 @@ export const TableComponent = ({ data }) => {
     };
 
     return (
-        <div className="flex flex-col items-center p-[1%]">
-            <div>
-                <table className="table-auto border-collapse border border-gray-400">
-                    <thead>
+        <div className="flex flex-col items-center p-2 sm:p-4">
+            <div className="overflow-x-auto w-full max-w-full">
+                <table className="min-w-full divide-y divide-gray-200 border-collapse shadow-sm">
+                    <thead className="bg-gray-50">
                         <tr>
                             <th
-                                className="border border-gray-400 text-center px-[2vw] py-[1vh]"
+                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 rowSpan={2}
                             >
                                 Date
                             </th>
                             <th
-                                className="border border-gray-400 text-center px-[2vw] py-[1vh]"
+                                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-blue-50"
                                 colSpan={3}
                             >
-                                {`Temperature ${data.daily_units.temperature_2m_max}`}{" "}
+                                {`Temperature ${data.daily_units.temperature_2m_max}`}
                             </th>
                             <th
-                                className="border border-gray-400 text-center px-[2vw] py-[1vh]"
+                                className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-orange-50"
                                 colSpan={3}
                             >
                                 {`Apparent Temperature ${data.daily_units.apparent_temperature_max}`}
                             </th>
                         </tr>
                         <tr>
-                            <td className="border border-gray-400 text-center px-[2vw] py-[1vh]">
+                            <td className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-blue-50">
                                 Max
                             </td>
-                            <td className="border border-gray-400 text-center px-[2vw] py-[1vh]">
+                            <td className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-blue-50">
                                 Mean
                             </td>
-                            <td className="border border-gray-400 text-center px-[2vw] py-[1vh]">
+                            <td className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-blue-50">
                                 Min
                             </td>
-                            <td className="border border-gray-400 text-center px-[2vw] py-[1vh]">
+                            <td className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-orange-50">
                                 Max
                             </td>
-                            <td className="border border-gray-400 text-center px-[2vw] py-[1vh]">
+                            <td className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-orange-50">
                                 Mean
                             </td>
-                            <td className="border border-gray-400 text-center px-[2vw] py-[1vh]">
+                            <td className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider bg-orange-50">
                                 Min
                             </td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="bg-white divide-y divide-gray-200">
                         {data.daily.time.map(
                             (time, index) =>
                                 index < page * perPage &&
                                 index >= (page - 1) * perPage && (
                                     <tr
                                         key={index}
-                                        className={` ${
+                                        className={`${
                                             index % 2 === 0
-                                                ? "bg-gray-100"
-                                                : "bg-white"
-                                        }`}
+                                                ? "bg-white"
+                                                : "bg-gray-50"
+                                        } hover:bg-gray-100 transition-colors duration-150`}
                                     >
-                                        <td className="border border-gray-400 px-[2vw] py-[1vh] text-center">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                             {time}
                                         </td>
-                                        <td className="border border-gray-400 px-[2vw] py-[1vh] text-center">
-                                            {
-                                                data.daily.temperature_2m_max[
-                                                    index
-                                                ]
-                                            }
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-blue-50">
+                                            <span className="font-medium text-red-600">
+                                                {
+                                                    data.daily
+                                                        .temperature_2m_max[
+                                                        index
+                                                    ]
+                                                }
+                                            </span>
                                         </td>
-                                        <td className="border border-gray-400 px-[2vw] py-[1vh] text-center">
-                                            {
-                                                data.daily.temperature_2m_mean[
-                                                    index
-                                                ]
-                                            }
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-blue-50">
+                                            <span className="font-medium text-blue-600">
+                                                {
+                                                    data.daily
+                                                        .temperature_2m_mean[
+                                                        index
+                                                    ]
+                                                }
+                                            </span>
                                         </td>
-                                        <td className="border border-gray-400 px-[2vw] py-[1vh] text-center">
-                                            {
-                                                data.daily.temperature_2m_min[
-                                                    index
-                                                ]
-                                            }
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-blue-50">
+                                            <span className="font-medium text-green-600">
+                                                {
+                                                    data.daily
+                                                        .temperature_2m_min[
+                                                        index
+                                                    ]
+                                                }
+                                            </span>
                                         </td>
-                                        <td className="border border-gray-400 px-[2vw] py-[1vh] text-center">
-                                            {
-                                                data.daily
-                                                    .apparent_temperature_max[
-                                                    index
-                                                ]
-                                            }
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-orange-50">
+                                            <span className="font-medium text-red-600">
+                                                {
+                                                    data.daily
+                                                        .apparent_temperature_max[
+                                                        index
+                                                    ]
+                                                }
+                                            </span>
                                         </td>
-                                        <td className="border border-gray-400 px-[2vw] py-[1vh] text-center">
-                                            {
-                                                data.daily
-                                                    .apparent_temperature_mean[
-                                                    index
-                                                ]
-                                            }
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-orange-50">
+                                            <span className="font-medium text-purple-600">
+                                                {
+                                                    data.daily
+                                                        .apparent_temperature_mean[
+                                                        index
+                                                    ]
+                                                }
+                                            </span>
                                         </td>
-                                        <td className="border border-gray-400 px-[2vw] py-[1vh] text-center">
-                                            {
-                                                data.daily
-                                                    .apparent_temperature_min[
-                                                    index
-                                                ]
-                                            }
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-orange-50">
+                                            <span className="font-medium text-green-600">
+                                                {
+                                                    data.daily
+                                                        .apparent_temperature_min[
+                                                        index
+                                                    ]
+                                                }
+                                            </span>
                                         </td>
                                     </tr>
                                 )
                         )}
                     </tbody>
-                    <tfoot>
+                    <tfoot className="bg-gray-50">
                         <tr>
-                            <td
-                                colSpan={7}
-                                className="border border-gray-400 px-[2vw] py-[1vh] text-center"
-                            >
-                                <button
-                                    className="border border-gray-400 px-[1vw]"
-                                    onClick={() => decreasePage()}
-                                >{`<`}</button>
-                                {` `}
-                                <input
-                                    type="text"
-                                    className="border border-gray-400 w-[3vw] text-center"
-                                    value={page}
-                                    onChange={(e) =>
-                                        handleJumpToPage(e.target.value)
-                                    }
-                                />
-                                {`/${Math.ceil(
-                                    data.daily.time.length / perPage
-                                )}`}
-                                {` `}
-                                <button
-                                    className="border border-gray-400 px-[1vw]"
-                                    onClick={() => increasePage()}
-                                >{`>`}</button>
+                            <td colSpan={7} className="px-6 py-4 text-center">
+                                <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                                    <button
+                                        className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        onClick={() => decreasePage()}
+                                        disabled={page === 1}
+                                    >
+                                        <FaChevronLeft className="mr-1" />{" "}
+                                        Previous
+                                    </button>
+
+                                    <div className="flex items-center space-x-1 my-2 sm:my-0">
+                                        <span className="text-sm text-gray-700">
+                                            Page
+                                        </span>
+                                        <input
+                                            type="text"
+                                            className="border border-gray-300 w-12 text-center rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                            value={page}
+                                            onChange={(e) =>
+                                                handleJumpToPage(
+                                                    parseInt(e.target.value)
+                                                )
+                                            }
+                                        />
+                                        <span className="text-sm text-gray-700">
+                                            of{" "}
+                                            {Math.ceil(
+                                                data.daily.time.length / perPage
+                                            )}
+                                        </span>
+                                    </div>
+
+                                    <button
+                                        className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        onClick={() => increasePage()}
+                                        disabled={
+                                            page >=
+                                            Math.ceil(
+                                                data.daily.time.length / perPage
+                                            )
+                                        }
+                                    >
+                                        Next <FaChevronRight className="ml-1" />
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         <tr>
-                            <td
-                                className="border border-gray-400 px-[2vw] py-[1vh] border border-gray-400 text-center"
-                                colSpan={7}
-                            >
-                                <div>
-                                    Per page:
+                            <td className="px-6 py-4 text-center" colSpan={7}>
+                                <div className="flex flex-wrap items-center justify-center space-x-2">
+                                    <span className="text-sm text-gray-700">
+                                        Show
+                                    </span>
                                     <select
-                                        className="border border-gray-400"
+                                        className="border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
                                         value={perPage}
                                         onChange={(e) =>
                                             setPerPage(e.target.value)
@@ -195,6 +231,9 @@ export const TableComponent = ({ data }) => {
                                             <option value="all">All</option>
                                         )}
                                     </select>
+                                    <span className="text-sm text-gray-700">
+                                        entries per page
+                                    </span>
                                 </div>
                             </td>
                         </tr>
