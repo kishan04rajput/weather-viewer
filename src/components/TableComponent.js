@@ -16,14 +16,14 @@ export const TableComponent = ({ data }) => {
         if (page === 1) {
             return;
         }
-        setPage(page - 1);
+        setPage(parseInt(page) - 1);
     };
 
     const increasePage = () => {
         if (page >= data.daily.time.length / perPage) {
             return;
         }
-        setPage(page + 1);
+        setPage(parseInt(page) + 1);
     };
 
     const handleJumpToPage = (value) => {
@@ -140,11 +140,11 @@ export const TableComponent = ({ data }) => {
 
                 {/* Mobile Pagination Controls - Bottom */}
                 <div className="bg-white rounded-lg shadow-sm p-3 mt-4">
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-center mb-3 gap-3">
                         <button
                             className="inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                             onClick={() => decreasePage()}
-                            disabled={page === 1}
+                            disabled={parseInt(page) <= 1}
                         >
                             <FaChevronLeft className="mr-1" /> Prev
                         </button>
@@ -156,7 +156,7 @@ export const TableComponent = ({ data }) => {
                                 className="border border-gray-300 w-10 text-center rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"
                                 value={page}
                                 onChange={(e) =>
-                                    handleJumpToPage(parseInt(e.target.value))
+                                    handleJumpToPage(e.target.value)
                                 }
                             />
                             <span className="text-xs text-gray-700">
@@ -184,10 +184,20 @@ export const TableComponent = ({ data }) => {
                             onChange={(e) => setPerPage(e.target.value)}
                         >
                             <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                            <option value="60">60</option>
-                            <option value="all">All</option>
+                            {data.daily.time.length > 15 && (
+                                <option value="30">30</option>
+                            )}
+                            {data.daily.time.length > 30 && (
+                                <option value="45">45</option>
+                            )}
+                            {data.daily.time.length > 45 && (
+                                <option value="60">60</option>
+                            )}
+                            {data.daily.time.length > 60 && (
+                                <option value={data.daily.time.length}>
+                                    {data.daily.time.length}
+                                </option>
+                            )}
                         </select>
                         <span className="text-xs text-gray-700 ml-2">
                             per page
@@ -337,7 +347,7 @@ export const TableComponent = ({ data }) => {
                                         <button
                                             className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                                             onClick={() => decreasePage()}
-                                            disabled={page === 1}
+                                            disabled={parseInt(page) <= 1}
                                         >
                                             <FaChevronLeft className="mr-1" />{" "}
                                             Previous
@@ -400,13 +410,27 @@ export const TableComponent = ({ data }) => {
                                             }
                                         >
                                             <option value="15">15</option>
-                                            <option value="30">30</option>
-                                            <option value="45">45</option>
-                                            <option value="60">60</option>
-                                            <option value="all">All</option>
+                                            {data.daily.time.length > 15 && (
+                                                <option value="30">30</option>
+                                            )}
+                                            {data.daily.time.length > 30 && (
+                                                <option value="45">45</option>
+                                            )}
+                                            {data.daily.time.length > 45 && (
+                                                <option value="60">60</option>
+                                            )}
+                                            {data.daily.time.length > 60 && (
+                                                <option
+                                                    value={
+                                                        data.daily.time.length
+                                                    }
+                                                >
+                                                    {data.daily.time.length}
+                                                </option>
+                                            )}
                                         </select>
                                         <span className="text-sm text-gray-700">
-                                            entries per page
+                                            per page
                                         </span>
                                     </div>
                                 </td>
