@@ -9,11 +9,62 @@ import { FooterComponent } from "./components/FooterComponent.js";
 
 function App() {
     const [isLoading, setIsLoading] = useState(false);
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
+    const [latitude, setLatitude] = useState("1");
+    const [longitude, setLongitude] = useState("1");
     const [fromDate, setFromDate] = useState("");
     const [toDate, setToDate] = useState("");
     const [data, setData] = useState(null);
+
+    const processResponse = async (response) => {
+        const processedData = {
+            ...response,
+            daily: {
+                ...response.daily,
+                time: [],
+                temperature_2m_max: [],
+                temperature_2m_min: [],
+                temperature_2m_mean: [],
+                apparent_temperature_max: [],
+                apparent_temperature_min: [],
+                apparent_temperature_mean: [],
+            },
+        };
+
+        for (let i = 0; i < response.daily.time.length; i++) {
+            if (
+                response.daily.temperature_2m_max[i] !== null &&
+                response.daily.temperature_2m_min[i] !== null &&
+                response.daily.temperature_2m_mean[i] !== null &&
+                response.daily.apparent_temperature_max[i] !== null &&
+                response.daily.apparent_temperature_min[i] !== null &&
+                response.daily.apparent_temperature_mean[i] !== null
+            ) {
+                processedData.daily.time.push(response.daily.time[i]);
+                processedData.daily.temperature_2m_max.push(
+                    response.daily.temperature_2m_max[i]
+                );
+                processedData.daily.temperature_2m_min.push(
+                    response.daily.temperature_2m_min[i]
+                );
+                processedData.daily.temperature_2m_mean.push(
+                    response.daily.temperature_2m_mean[i]
+                );
+                processedData.daily.apparent_temperature_max.push(
+                    response.daily.apparent_temperature_max[i]
+                );
+                processedData.daily.apparent_temperature_min.push(
+                    response.daily.apparent_temperature_min[i]
+                );
+                processedData.daily.apparent_temperature_mean.push(
+                    response.daily.apparent_temperature_mean[i]
+                );
+            }
+        }
+
+        await addDelay(1000); // added delay to show loading indicator
+
+        setData(processedData);
+    };
 
     const isInputValidated = () => {
         if (!latitude) {
@@ -51,9 +102,7 @@ function App() {
             const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_max,apparent_temperature_min,apparent_temperature_mean&start_date=${fromDate}&end_date=${toDate}&timezone=Asia/Kolkata`;
             // const response = await axios.get(apiUrl);
             const response = mockResponse; // for testing
-            setData(response.data);
-            await addDelay(1000);
-            console.log("API data:", response.data);
+            await processResponse(response.data);
         } catch (error) {
             console.error("Error fetching data from API", error.response.data);
             window.alert("Error fetching data from API");
