@@ -198,15 +198,11 @@ export const TableComponent = ({ data }) => {
                             value={perPage}
                             onChange={(e) => setPerPage(e.target.value)}
                         >
-                            <option value="5">5</option>
-                            <option value="10">10</option>
                             <option value="15">15</option>
-                            {data.daily.time.length > 15 && (
-                                <option value="30">30</option>
-                            )}
-                            {data.daily.time.length > 30 && (
-                                <option value="all">All</option>
-                            )}
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                            <option value="60">60</option>
+                            <option value="all">All</option>
                         </select>
                         <span className="text-xs text-gray-700 ml-2">
                             per page
@@ -419,18 +415,10 @@ export const TableComponent = ({ data }) => {
                                             }
                                         >
                                             <option value="15">15</option>
-                                            {data.daily.time.length > 15 && (
-                                                <option value="30">30</option>
-                                            )}
-                                            {data.daily.time.length > 30 && (
-                                                <option value="45">45</option>
-                                            )}
-                                            {data.daily.time.length > 45 && (
-                                                <option value="60">60</option>
-                                            )}
-                                            {data.daily.time.length > 60 && (
-                                                <option value="all">All</option>
-                                            )}
+                                            <option value="30">30</option>
+                                            <option value="45">45</option>
+                                            <option value="60">60</option>
+                                            <option value="all">All</option>
                                         </select>
                                         <span className="text-sm text-gray-700">
                                             entries per page
