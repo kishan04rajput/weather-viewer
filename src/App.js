@@ -16,7 +16,7 @@ function App() {
     const [data, setData] = useState(null);
 
     const processResponse = async (response) => {
-        const processedData = {
+        let processedData = {
             ...response,
             daily: {
                 ...response.daily,
