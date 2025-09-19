@@ -64,7 +64,7 @@ function App() {
             {isLoading ? (
                 <h1>Loading...</h1>
             ) : (
-                <div className="flex flex-col gap-[1vh] p-[1%] min-w-min min-h-min">
+                <div className="flex flex-col gap-[1vh] p-[1%] min-w-[360px] min-h-min">
                     {/* get info block */}
                     <div className="flex flex-col border border-gray-400 rounded-[10px] p-[1%] gap-[1vh]">
                         <LocationDateBlock
