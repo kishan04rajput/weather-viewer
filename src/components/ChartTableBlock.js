@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChartComponent } from "./ChartComponent";
 import { TableComponent } from "./TableComponent";
 import { FaChartLine, FaTable } from "react-icons/fa";
 
 const ChartTableBlock = ({ data }) => {
     const [displayMode, setDisplayMode] = useState("table");
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 640);
+        };
+
+        // Initial check
+        checkMobile();
+
+        // Add event listener
+        window.addEventListener("resize", checkMobile);
+
+        // Cleanup
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
     const displayChart = () => {
         if (displayMode === "chart") {
@@ -31,7 +47,7 @@ const ChartTableBlock = ({ data }) => {
     return (
         <div>
             {data && (
-                <div className="flex border border-gray-200 bg-white rounded-xl p-6 shadow-md flex-col justify-center">
+                <div className="flex border border-gray-200 bg-white rounded-xl p-3 sm:p-6 shadow-md flex-col justify-center">
                     {/* Display Mode Buttons */}
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center mb-4 sm:mb-6">
                         <button
@@ -60,17 +76,17 @@ const ChartTableBlock = ({ data }) => {
                         </button>
                     </div>
                     {/* Display Mode Content */}
-                    <div className="bg-white rounded-lg overflow-hidden">
+                    <div className="bg-white rounded-lg overflow-hidden w-full">
                         {displayMode === "chart" ? (
-                            <div className="p-2">
-                                <h3 className="text-lg font-medium text-gray-800 mb-4 text-center">
+                            <div className="p-1 sm:p-2">
+                                <h3 className="text-base sm:text-lg font-medium text-gray-800 mb-2 sm:mb-4 text-center">
                                     Temperature Data Chart
                                 </h3>
                                 <ChartComponent data={data} />
                             </div>
                         ) : (
                             <div>
-                                <h3 className="text-lg font-medium text-gray-800 mb-4 text-center">
+                                <h3 className="text-base sm:text-lg font-medium text-gray-800 mb-2 sm:mb-4 text-center">
                                     Temperature Data Table
                                 </h3>
                                 <TableComponent data={data} />

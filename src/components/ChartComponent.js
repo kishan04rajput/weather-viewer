@@ -8,8 +8,24 @@ import {
     Legend,
     ResponsiveContainer,
 } from "recharts";
+import { useState, useEffect } from "react";
 
 export const ChartComponent = ({ data }) => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+    const isMobile = windowWidth < 640;
+
     const chartData = data.daily.time.map((date, i) => ({
         date,
         tempMax: data.daily.temperature_2m_max[i],
@@ -21,35 +37,59 @@ export const ChartComponent = ({ data }) => {
     }));
 
     return (
-        <ResponsiveContainer width="100%" height={400} className="mt-4">
+        <ResponsiveContainer
+            width="100%"
+            height={isMobile ? 300 : 400}
+            className="mt-4"
+        >
             <LineChart
                 data={chartData}
-                margin={{ top: 10, right: 30, left: 20, bottom: 30 }}
+                margin={{
+                    top: 10,
+                    right: isMobile ? 10 : 30,
+                    left: isMobile ? 0 : 20,
+                    bottom: isMobile ? 60 : 30,
+                }}
             >
                 <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
                 <XAxis
                     dataKey="date"
                     textAnchor="end"
                     height={70}
-                    tick={{ fill: "#666", fontSize: 12 }}
+                    tick={{
+                        fill: "#666",
+                        fontSize: isMobile ? 10 : 12,
+                        angle: isMobile ? -45 : 0,
+                        dy: isMobile ? 10 : 0,
+                    }}
                     tickLine={{ stroke: "#ccc" }}
                     axisLine={{ stroke: "#ccc" }}
+                    interval={isMobile ? 1 : 0}
                 />
                 <YAxis
-                    label={{
-                        value: "Temperature (°C)",
-                        angle: -90,
-                        position: "left",
-                        offset: -10,
-                        style: {
-                            textAnchor: "middle",
-                            fill: "#666",
-                            fontSize: 13,
-                        },
+                    label={
+                        isMobile
+                            ? null
+                            : {
+                                  value: "Temperature (°C)",
+                                  angle: -90,
+                                  position: "left",
+                                  offset: -10,
+                                  style: {
+                                      textAnchor: "middle",
+                                      fill: "#666",
+                                      fontSize: 13,
+                                  },
+                              }
+                    }
+                    tick={{
+                        fill: "#666",
+                        fontSize: isMobile ? 10 : 12,
+                        dx: isMobile ? -5 : 0,
                     }}
-                    tick={{ fill: "#666", fontSize: 12 }}
                     tickLine={{ stroke: "#ccc" }}
                     axisLine={{ stroke: "#ccc" }}
+                    width={isMobile ? 30 : 60}
                 />
                 <Tooltip
                     contentStyle={{
@@ -64,8 +104,12 @@ export const ChartComponent = ({ data }) => {
                 <Legend
                     align="center"
                     verticalAlign="bottom"
-                    wrapperStyle={{ paddingTop: "20px" }}
+                    wrapperStyle={{
+                        paddingTop: isMobile ? "10px" : "20px",
+                        fontSize: isMobile ? "10px" : "12px",
+                    }}
                     iconType="circle"
+                    layout={isMobile ? "vertical" : "horizontal"}
                 />
                 <Line
                     type="monotone"
