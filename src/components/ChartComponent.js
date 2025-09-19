@@ -64,7 +64,6 @@ export const ChartComponent = ({ data }) => {
                     }}
                     tickLine={{ stroke: "#ccc" }}
                     axisLine={{ stroke: "#ccc" }}
-                    // interval={isMobile ? 1 : 0}
                 />
                 <YAxis
                     label={

@@ -50,8 +50,7 @@ export const TableComponent = ({ data }) => {
         setPage(value);
     };
 
-    // Render a compact mobile view of the data
-    const renderCompactView = () => {
+    const renderMobileView = () => {
         return (
             <div className="w-full">
                 {data.daily.time.map(
@@ -217,7 +216,7 @@ export const TableComponent = ({ data }) => {
         <div className="flex flex-col items-center p-2 sm:p-4">
             <div className="overflow-x-auto w-full max-w-full">
                 {showCompactView ? (
-                    renderCompactView()
+                    renderMobileView()
                 ) : (
                     <table className="min-w-full divide-y divide-gray-200 border-collapse shadow-sm">
                         <thead className="bg-gray-50">

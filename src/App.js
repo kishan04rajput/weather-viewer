@@ -51,16 +51,12 @@ function App() {
 
         try {
             // const response = await axios.get(apiUrl);
+            await addDelay(1000);
             const response = qwerty;
             setData(response);
             console.log("API data:", response);
         } catch (error) {
             console.error("Error fetching data from API", error);
-            // Fallback to mock data for development/demo purposes
-            const mockResponse = qwerty;
-            await addDelay(1000);
-            setData(mockResponse);
-            console.log("Using mock data:", mockResponse);
         } finally {
             setIsLoading(false);
         }
