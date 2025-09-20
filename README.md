@@ -153,7 +153,7 @@ To create a production build, use npm run build.
    - Wait for the loading animation to complete
    - View the results in chart and table format
    - In development mode using mockResponse
-   - In production it will make api call
+   - In production mode it will make an api call
 
 ### Example Coordinates
 
