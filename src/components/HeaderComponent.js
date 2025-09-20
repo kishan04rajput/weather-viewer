@@ -18,12 +18,14 @@ export const HeaderComponent = () => {
                             </button>
                         </li>
                         <li>
-                            <button
-                                className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
+                            <a
+                                href="/Kishan Resume.pdf"
+                                download="Kishan Resume.pdf"
+                                className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200 cursor-pointer"
                                 title="Download Resume"
                             >
                                 Resume
-                            </button>
+                            </a>
                         </li>
                         <li>
                             <button
