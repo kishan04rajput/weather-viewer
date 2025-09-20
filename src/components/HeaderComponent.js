@@ -14,7 +14,7 @@ export const HeaderComponent = () => {
                     <ul className="flex space-x-4 sm:space-x-6">
                         <li>
                             <a
-                                href="#"
+                                href="/"
                                 className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
                             >
                                 Home
@@ -22,7 +22,7 @@ export const HeaderComponent = () => {
                         </li>
                         <li>
                             <a
-                                href="#"
+                                href="/"
                                 className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
                                 title="Download Resume"
                             >
@@ -31,7 +31,7 @@ export const HeaderComponent = () => {
                         </li>
                         <li>
                             <a
-                                href="#"
+                                href="/"
                                 className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
                                 title="kishan9rajput@gmail.com"
                                 onClick={() => setDisplayNumber(true)}
