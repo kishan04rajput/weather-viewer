@@ -13,31 +13,26 @@ export const HeaderComponent = () => {
                 <nav>
                     <ul className="flex space-x-4 sm:space-x-6">
                         <li>
-                            <a
-                                href="/"
-                                className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
-                            >
+                            <button className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200">
                                 Home
-                            </a>
+                            </button>
                         </li>
                         <li>
-                            <a
-                                href="/"
+                            <button
                                 className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
                                 title="Download Resume"
                             >
                                 Resume
-                            </a>
+                            </button>
                         </li>
                         <li>
-                            <a
-                                href="/"
+                            <button
                                 className="text-sm sm:text-base hover:text-blue-200 transition-colors duration-200"
                                 title="kishan9rajput@gmail.com"
                                 onClick={() => setDisplayNumber(true)}
                             >
                                 {displayNumber ? "+91 8347223811" : "Contact"}
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </nav>
