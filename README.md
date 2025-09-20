@@ -152,6 +152,8 @@ To create a production build, use npm run build.
    - Click the "Get Weather Data" button
    - Wait for the loading animation to complete
    - View the results in chart and table format
+   - In development mode using mockResponse
+   - In production it will make api call
 
 ### Example Coordinates
 
